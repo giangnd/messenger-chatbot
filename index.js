@@ -34,36 +34,19 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             let text = event.message.text
             if (text === 'Generic') {
-                const desc = "Hi , we noticed there was an item left in your shopping cart. If you're ready to complete your order, your cart is waiting for your return."
+                const desc = "Hi, we noticed there was an item left in your shopping cart. If you're ready to complete your order, your cart is waiting for your return."
                 sendTextMessage(sender, desc)
                 sendGenericMessage(sender)
                 continue
             }
-            sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
         }
     }
     res.sendStatus(200)
 })
 
-const token = "EAAEB79A3z5IBACswruLwuiSdMjZCVZCsZA9Bzy8tOm3HMUKOGJMa9UhtWJ7OwObPrZAk0iP18fuCpTxYuD11SXLiUuJNZAByy4XQh6FEG0ym6Lm5wkXZArZBdq2a8rcsjhKJksEBTnZCxPZB0Prbv0R4CBaaHCCmmtZC5cAtiZCxmOpBwZDZD"
-
 function sendTextMessage(sender, text) {
     let messageData = { text: text }
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: { access_token: token },
-        method: 'POST',
-        json: {
-            recipient: { id: sender },
-            message: messageData,
-        }
-    }, function (error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
+    makeRequest(sender, messageData)
 }
 
 function sendGenericMessage(sender) {
@@ -79,10 +62,6 @@ function sendGenericMessage(sender) {
                         "image_url": "https://cdn.shopify.com/s/files/1/2330/6765/products/maxresdefault-1080x675_419x.jpg",
                         "buttons": [{
                             "type": "web_url",
-                            "url": "https://magixshop.com/cart",
-                            "title": "View Cart"
-                        }, {
-                            "type": "web_url",
                             "url": "https://magixshop.com/",
                             "title": "Shop Now",
                         }],
@@ -91,13 +70,19 @@ function sendGenericMessage(sender) {
             }
         }
     }
+    makeRequest(sender, messageData)
+}
+
+const token = "EAAEB79A3z5IBACswruLwuiSdMjZCVZCsZA9Bzy8tOm3HMUKOGJMa9UhtWJ7OwObPrZAk0iP18fuCpTxYuD11SXLiUuJNZAByy4XQh6FEG0ym6Lm5wkXZArZBdq2a8rcsjhKJksEBTnZCxPZB0Prbv0R4CBaaHCCmmtZC5cAtiZCxmOpBwZDZD"
+
+function makeRequest(sender, message) {
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: { access_token: token },
         method: 'POST',
         json: {
             recipient: { id: sender },
-            message: messageData,
+            message: message,
         }
     }, function (error, response, body) {
         if (error) {
