@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -26,6 +26,7 @@ app.get('/webhook/', function (req, res) {
     res.send('Error, wrong token')
 })
 
+// to post data
 app.post('/webhook/', function (req, res) {
     let messaging_events = req.body.entry[0].messaging
     for (let i = 0; i < messaging_events.length; i++) {
@@ -34,8 +35,6 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             let text = event.message.text
             if (text === 'Generic') {
-                const desc = "Hi, we noticed there was an item left in your shopping cart. If you're ready to complete your order, your cart is waiting for your return."
-                sendTextMessage(sender, desc)
                 sendGenericMessage(sender)
                 continue
             }
@@ -44,6 +43,10 @@ app.post('/webhook/', function (req, res) {
     res.sendStatus(200)
 })
 
+// recommended to inject access tokens as environmental variables, e.g.
+// const token = process.env.FB_PAGE_ACCESS_TOKEN
+const token = "EAAEB79A3z5IBACswruLwuiSdMjZCVZCsZA9Bzy8tOm3HMUKOGJMa9UhtWJ7OwObPrZAk0iP18fuCpTxYuD11SXLiUuJNZAByy4XQh6FEG0ym6Lm5wkXZArZBdq2a8rcsjhKJksEBTnZCxPZB0Prbv0R4CBaaHCCmmtZC5cAtiZCxmOpBwZDZD"
+
 function sendTextMessage(sender, text) {
     let messageData = { text: text }
     makeRequest(sender, messageData)
@@ -51,6 +54,7 @@ function sendTextMessage(sender, text) {
 
 function sendGenericMessage(sender) {
     let messageData = {
+        "text": "Hi, we noticed there was an item left in your shopping cart. If you're ready to complete your order, your cart is waiting for your return.",
         "attachment": {
             "type": "template",
             "payload": {
@@ -72,8 +76,6 @@ function sendGenericMessage(sender) {
     }
     makeRequest(sender, messageData)
 }
-
-const token = "EAAEB79A3z5IBACswruLwuiSdMjZCVZCsZA9Bzy8tOm3HMUKOGJMa9UhtWJ7OwObPrZAk0iP18fuCpTxYuD11SXLiUuJNZAByy4XQh6FEG0ym6Lm5wkXZArZBdq2a8rcsjhKJksEBTnZCxPZB0Prbv0R4CBaaHCCmmtZC5cAtiZCxmOpBwZDZD"
 
 function makeRequest(sender, message) {
     request({
