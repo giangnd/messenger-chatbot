@@ -32,10 +32,11 @@ app.post('/webhook/', function (req, res) {
     for (let i = 0; i < messaging_events.length; i++) {
         let event = req.body.entry[0].messaging[i]
         let sender = event.sender.id
+        console.log(sender)
         if (event.message && event.message.text) {
             let text = event.message.text
             if (text === 'Generic') {
-                const desc = "Hi, we noticed there was an item left in your shopping cart. If you're ready to complete your order, your cart is waiting for your return."
+                const desc = "Hi there! We noticed there was an item left in your shopping cart. If you're ready to complete your order, your cart is waiting for your return."
                 sendTextMessage(sender, desc)
                 sendGenericMessage(sender)
                 continue
