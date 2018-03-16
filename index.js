@@ -34,15 +34,12 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             let text = event.message.text
             if (text === 'Generic') {
+                const desc = "Hi , we noticed there was an item left in your shopping cart. If you're ready to complete your order, your cart is waiting for your return."
+                sendTextMessage(sender, desc)
                 sendGenericMessage(sender)
                 continue
             }
             sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
-        }
-        if (event.postback) {
-            let text = JSON.stringify(event.postback)
-            sendTextMessage(sender, "Postback received: " + text.substring(0, 200), token)
-            continue
         }
     }
     res.sendStatus(200)
@@ -78,16 +75,16 @@ function sendGenericMessage(sender) {
                 "elements": [
                     {
                         "title": "Flower Piping Tips",
-                        "subtitle": "Get creative in the kitchen with this seven-piece set of flower piping tips. Perfect for decorating cakes, cookies, or cupcakes!",
+                        "subtitle": "1 x $35.00 USD",
                         "image_url": "https://cdn.shopify.com/s/files/1/2330/6765/products/maxresdefault-1080x675_419x.jpg",
                         "buttons": [{
                             "type": "web_url",
-                            "url": "https://www.messenger.com",
-                            "title": "Check Out Now"
+                            "url": "https://magixshop.com/cart",
+                            "title": "View Cart"
                         }, {
-                            "type": "phone_number",
-                            "title": "Call Us",
-                            "payload": "+84988447949",
+                            "type": "web_url",
+                            "url": "https://magixshop.com/",
+                            "title": "Shop Now",
                         }],
                     }
                 ]
