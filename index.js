@@ -82,12 +82,12 @@ function sendGenericMessage(sender) {
                         "image_url": "https://cdn.shopify.com/s/files/1/2330/6765/products/maxresdefault-1080x675_419x.jpg",
                         "buttons": [{
                             "type": "web_url",
-                            "url": "#",
+                            "url": "https://www.messenger.com",
                             "title": "Check Out Now"
                         }, {
                             "type": "phone_number",
                             "title": "Call Us",
-                            "payload": "84988447949",
+                            "payload": "+84988447949",
                         }],
                     }
                 ]
