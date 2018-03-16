@@ -75,29 +75,22 @@ function sendGenericMessage(sender) {
             "type": "template",
             "payload": {
                 "template_type": "generic",
-                "elements": [{
-                    "title": "First card",
-                    "subtitle": "Element #1 of an hscroll",
-                    "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
-                    "buttons": [{
-                        "type": "web_url",
-                        "url": "https://www.messenger.com",
-                        "title": "web url"
-                    }, {
-                        "type": "postback",
-                        "title": "Postback",
-                        "payload": "Payload for first element in a generic bubble",
-                    }],
-                }, {
-                    "title": "Second card",
-                    "subtitle": "Element #2 of an hscroll",
-                    "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
-                    "buttons": [{
-                        "type": "postback",
-                        "title": "Postback",
-                        "payload": "Payload for second element in a generic bubble",
-                    }],
-                }]
+                "elements": [
+                    {
+                        "title": "Flower Piping Tips",
+                        "subtitle": "Get creative in the kitchen with this seven-piece set of flower piping tips. Perfect for decorating cakes, cookies, or cupcakes!",
+                        "image_url": "https://cdn.shopify.com/s/files/1/2330/6765/products/maxresdefault-1080x675_419x.jpg",
+                        "buttons": [{
+                            "type": "web_url",
+                            "url": "#",
+                            "title": "Check Out Now"
+                        }, {
+                            "type": "phone_number",
+                            "title": "Call Us",
+                            "payload": "84988447949",
+                        }],
+                    }
+                ]
             }
         }
     }
