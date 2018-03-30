@@ -34,8 +34,8 @@
 				} else if (e.event == 'checkbox') {
 					var checkboxState = e.state;
 					console.log("Checkbox state: " + checkboxState);
-					if(checkboxState === 'checked'){
-						recartMessengerDiscountButton();
+					if(checkboxState == 'checked'){
+						$("#recartBtn").trigger('click');
 					}
 				} else if (e.event == 'not_you') {
 					console.log("User clicked 'not you'");
@@ -95,7 +95,7 @@
 
 <hr>
 
-<input type="button" onclick="recartMessengerDiscountButton()" value="Get Your Discount"/>
+<input id="recartBtn" type="button" onclick="recartMessengerDiscountButton()" value="Get Your Discount"/>
 
 </body>
 </html>
