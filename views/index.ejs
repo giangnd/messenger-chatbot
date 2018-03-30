@@ -34,9 +34,6 @@
 				} else if (e.event == 'checkbox') {
 					var checkboxState = e.state;
 					console.log("Checkbox state: " + checkboxState);
-					if(checkboxState == 'checked'){
-						$("#recartBtn").trigger('click');
-					}
 				} else if (e.event == 'not_you') {
 					console.log("User clicked 'not you'");
 				} else if (e.event == 'hidden') {
@@ -60,9 +57,6 @@
 				url: "https://graph.facebook.com/v2.6/me/messages?access_token=<%= token %>",
 				type: "POST",
 				data: {
-					sender: {
-						id: '<%= page_id %>'
-					},
 					recipient: {
 						user_ref: '<%= user_ref %>'
 					},
@@ -75,27 +69,31 @@
 				cache: false,
 				success: function(result){
 					console.log(result);
+					$(".close-modal").hide();
+					$(".message").html('Your discount code has been sent to your FB messenger! Get it and enjoy discount shopping now!');
 				}
 			});
 		}
 
 	</script>
 
-	<div class="fb-messenger-checkbox"  
-	origin="https://re-cart.herokuapp.com/"
-	page_id="<%= page_id %>"
-	messenger_app_id="<%= app_id %>"
-	user_ref="<%= user_ref %>"
-	prechecked="true"
-	allow_login="true"
-	size="medium"
-	skin="light"
-	center_align="true">
-</div> 
-
+	<div class="message"></div>
+	<div class="close-modal">
+		<div class="fb-messenger-checkbox"  
+		origin="https://re-cart.herokuapp.com/"
+		page_id="<%= page_id %>"
+		messenger_app_id="<%= app_id %>"
+		user_ref="<%= user_ref %>"
+		prechecked="true"
+		allow_login="true"
+		size="medium"
+		skin="light"
+		center_align="true">
+	</div> 
+</div>
 <hr>
 
-<input id="recartBtn" type="button" onclick="recartMessengerDiscountButton()" value="Get Your Discount"/>
+<input type="button" onclick="recartMessengerDiscountButton()" value="Get Your Discount"/>
 
 </body>
 </html>
