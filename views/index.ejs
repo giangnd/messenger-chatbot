@@ -53,6 +53,9 @@
 				url: "https://graph.facebook.com/v2.6/me/messages?access_token=<%= token %>",
 				type: "POST",
 				data: {
+					sender: {
+						id: '<%= page_id %>'
+					}
 					recipient: {
 						user_ref: '<%= user_ref %>'
 					},
