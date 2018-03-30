@@ -18,7 +18,11 @@ app.set("views", "./views")
 
 // Index route
 app.get('/', function (req, res) {
-    res.render("index", {user_ref: Date.now()})
+    res.render("index", {
+        app_id: 283604478840722,
+        page_id: 388558238011454,
+        user_ref: Date.now()
+    })
 })
 
 // for Facebook verification
