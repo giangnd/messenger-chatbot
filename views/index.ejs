@@ -2,6 +2,10 @@
 <html>
 <head>
 	<title>Facebook Marketing</title>
+	<script
+	src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
 </head>
 <body>
 	<script>
@@ -41,6 +45,22 @@
 				'app_id': '<%= app_id %>',
 				'page_id':'<%= page_id %>',
 				'user_ref':'<%= user_ref %>'
+			});
+
+			$.ajax({
+				url: "https://graph.facebook.com/v2.6/me/messages?access_token=<%= token %>",
+				type: "POST",
+				data: {
+					sender: {
+						id: '<%= user_ref %>';
+					},
+					message: {
+						text: 'Generic'
+					}
+				},
+				success: function(result){
+					console.log(result);
+				}
 			});
 		}
 
