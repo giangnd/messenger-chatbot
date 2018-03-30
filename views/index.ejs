@@ -77,23 +77,29 @@
 
 	</script>
 
-	<div class="message"></div>
-	<div class="close-modal">
-		<div class="fb-messenger-checkbox"  
-		origin="https://re-cart.herokuapp.com/"
-		page_id="<%= page_id %>"
-		messenger_app_id="<%= app_id %>"
-		user_ref="<%= user_ref %>"
-		prechecked="true"
-		allow_login="true"
-		size="medium"
-		skin="light"
-		center_align="true">
-	</div> 
+	<div class="center">
+		
+		<div class="message"></div>
+		
+		<div class="close-modal">
+			<div class="fb-messenger-checkbox"  
+			origin="https://re-cart.herokuapp.com/"
+			page_id="<%= page_id %>"
+			messenger_app_id="<%= app_id %>"
+			user_ref="<%= user_ref %>"
+			prechecked="true"
+			allow_login="true"
+			size="medium"
+			skin="light"
+			center_align="true">
+		</div> 
+
+		<hr>
+
+		<input type="button" onclick="recartMessengerDiscountButton()" value="Get Your Discount"/>
+		
+	</div>
+
 </div>
-<hr>
-
-<input type="button" onclick="recartMessengerDiscountButton()" value="Get Your Discount"/>
-
 </body>
 </html>
