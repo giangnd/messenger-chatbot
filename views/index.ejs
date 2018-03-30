@@ -34,6 +34,7 @@
 				} else if (e.event == 'checkbox') {
 					var checkboxState = e.state;
 					console.log("Checkbox state: " + checkboxState);
+					sendRecartDiscount();
 				} else if (e.event == 'not_you') {
 					console.log("User clicked 'not you'");
 				} else if (e.event == 'hidden') {
@@ -49,6 +50,10 @@
 				'user_ref':'<%= user_ref %>'
 			});
 
+			sendRecartDiscount();
+		}
+
+		function sendRecartDiscount(){
 			$.ajax({
 				url: "https://graph.facebook.com/v2.6/me/messages?access_token=<%= token %>",
 				type: "POST",
