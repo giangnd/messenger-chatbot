@@ -51,7 +51,7 @@
 				url: "https://graph.facebook.com/v2.6/me/messages?access_token=<%= token %>",
 				type: "POST",
 				data: {
-					sender: {
+					recipient: {
 						id: '<%= user_ref %>'
 					},
 					message: {
