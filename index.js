@@ -13,9 +13,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // Process application/json
 app.use(bodyParser.json())
 
+app.set("view engine", "ejs")
+app.set("views", "./views")
+
 // Index route
 app.get('/', function (req, res) {
-    res.send('Hello world, I am a chat bot')
+    res.render("index")
 })
 
 // for Facebook verification
@@ -32,7 +35,6 @@ app.post('/webhook/', function (req, res) {
     for (let i = 0; i < messaging_events.length; i++) {
         let event = req.body.entry[0].messaging[i]
         let sender = event.sender.id
-        console.log(sender)
         if (event.message && event.message.text) {
             let text = event.message.text
             if (text === 'Generic') {
