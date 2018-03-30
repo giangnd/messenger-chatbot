@@ -47,17 +47,21 @@
 				'user_ref':'<%= user_ref %>'
 			});
 
+			var data = {
+				"recipient": {
+					"user_ref":"<%= user_ref %>"
+				}, 
+				"message": {
+					"text":"Generic"
+				}
+			};
+
 			$.ajax({
 				url: "https://graph.facebook.com/v2.6/me/messages?access_token=<%= token %>",
 				type: "POST",
-				data: {
-					recipient: {
-						user_ref: '<%= user_ref %>'
-					},
-					message: {
-						text: 'Generic'
-					}
-				},
+				data: JSON.stringify(data),
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
 				success: function(result){
 					console.log(result);
 				}
