@@ -25,7 +25,7 @@ app.get('/', function (req, res) {
     res.render("index", {
         app_id: 283604478840722,
         page_id: 388558238011454,
-        user_ref: 'magixshop' + Date.now(),
+        user_ref: Date.now(),
         token: token
     })
 })
