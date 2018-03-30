@@ -1,1 +1,240 @@
-Hello
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Facebook Marketing</title>
+	<style>
+	.klaviyo_modal{
+		pointer-events: none;
+	}
+	.klaviyo_modal .klaviyo_inner{
+	/*background-image: url('https://i.imgur.com/Wm0w4WB.png') !important;
+	background-color: #FFCD19 !important;
+	background-repeat: no-repeat !important;
+	background-position: center center !important;
+	background-size: cover !important;*/
+	width: 600px !important;
+	min-height: 600px;
+	max-height: 600px !important;
+	max-width: 92%;
+	background: #FFCD19 !important;
+	transform: translate(-50%, -50%) !important;
+	top: 50% !important;
+	left: 50% !important;
+	margin: 0 !important;
+	border-radius: 50% !important;
+	pointer-events: all;
+}
+.klaviyo_modal .klaviyo_header_close,
+.klaviyo_modal .klaviyo_header,
+.klaviyo_modal .klaviyo_subheader{
+	font-family: Arial, sans-serif !important;
+	color: #fff !important;
+}
+.klaviyo_modal .klaviyo_header_close{
+	font-size: 28px !important;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+}
+.klaviyo_modal .klaviyo_header{
+	font-weight: 700;
+}
+.klaviyo_modal .klaviyo_subheader{
+	font-size: 16px;
+}
+.klaviyo_modal form{
+	max-height: initial !important;
+}
+.klaviyo_modal .klaviyo_fieldset,
+.klaviyo_modal .klaviyo_form_actions{
+	border: 0 !important;
+	padding: 10px 0 0 !important;
+}
+.klaviyo_modal .error_message,
+.klaviyo_modal .success_message{
+	padding: 10px !important;
+}
+.klaviyo_modal .success_message{
+	color: green !important;
+}
+.klaviyo_modal .klaviyo_fieldset .klaviyo_field_group input[type=text], 
+.klaviyo_modal .klaviyo_fieldset .klaviyo_field_group input[type=email]{
+	width: 60% !important;
+	display: block;
+	margin: 0 auto !important;
+	background-color: #fff;
+	border: 0 !important;
+	border-radius: 0 !important;
+	text-align: center;
+}
+.klaviyo_modal .klaviyo_submit_button,
+.klaviyo_modal .klaviyo_submit_button span{
+	background: #000 !important;
+	text-transform: uppercase;
+	font-weight: normal !important;
+	display: block !important;
+	width: 230px !important;
+	margin: 0 auto !important;
+	font-size: 13px !important;
+	height: auto !important;
+	line-height: 25px !important;
+}
+.no_thanks{
+	text-align: center;
+	font-size: 12px;
+	color: #333;
+	cursor: pointer;
+	text-decoration: underline;
+	margin-top: 20px;
+}
+.newsletter_modal_img{
+	display: block;
+	text-align: center;
+}
+.klaviyo_modal_content{
+	text-align: center;
+	padding-top: 100px;
+}
+.klaviyo_modal_content p{
+	color: #333;
+}
+
+@media only screen and (max-width: 600px) {
+	.klaviyo_modal .klaviyo_inner{
+		border-radius: 0 !important;
+	}
+}
+
+@media only screen and (max-width: 444px) {
+	.klaviyo_modal .klaviyo_inner{
+		min-height: auto !important;
+	}
+	.klaviyo_modal_content{
+		padding-top: 38px;
+	}
+	.klaviyo_modal_content .p1{
+		font-size: 20px !important;
+	}
+	.klaviyo_modal .klaviyo_fieldset .klaviyo_field_group input[type=text], 
+	.klaviyo_modal .klaviyo_fieldset .klaviyo_field_group input[type=email],
+	.klaviyo_modal .klaviyo_submit_button{
+		width: 100% !important;
+	}
+}
+
+@media only screen and (max-width: 320px) {
+	.klaviyo_modal .klaviyo_inner{
+		min-height: auto !important;
+		top: 55% !important;
+	}
+	.klaviyo_modal_content{
+		padding-top: 60px !important;
+	}
+	.klaviyo_modal_content p{
+		line-height: 20px !important;
+	}
+	.klaviyo_modal_content .p1{
+		font-size: 18px !important;
+	}
+	.klaviyo_modal_content .p2{
+		font-size: 32px !important;
+		line-height: inherit !important;
+	}
+	.klaviyo_modal_content .p4{
+		font-size: 13px !important;
+	}
+}
+</style>
+</head>
+<body>
+	<script>
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId            : '283604478840722',
+				xfbml            : true,
+				version          : 'v2.12'
+			});
+			FB.Event.subscribe('messenger_checkbox', function(e) {
+				console.log("messenger_checkbox event");
+				console.log(e);
+
+				if (e.event == 'rendered') {
+					console.log("Plugin was rendered");
+				} else if (e.event == 'checkbox') {
+					var checkboxState = e.state;
+					console.log("Checkbox state: " + checkboxState);
+				} else if (e.event == 'not_you') {
+					console.log("User clicked 'not you'");
+				} else if (e.event == 'hidden') {
+					console.log("Plugin was hidden");
+				}
+			});
+		};
+
+		(function(d, s, id){
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {return;}
+			js = d.createElement(s); js.id = id;
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+	<script type="text/javascript" src="//www.klaviyo.com/media/js/public/klaviyo_subscribe.js"></script>
+	<script>
+		var subscribe_message = "Your discount code has been sent to your email! <br> Get it and enjoy discount shopping now!";
+		KlaviyoSubscribe.attachToModalForm('#k_id_modal', {
+		// delay_seconds: 30,
+		success_message: subscribe_message,
+		success: function ($form) {
+			$form.hide();
+			removeMenuDiscount();
+			klaPopupExpireTime(525600); //1 year
+			setTimeout(function(){
+				klaClosePopup();
+			}, 8000);
+		},
+	});
+</script>
+<div class="klaviyo_modal" id="k_id_modal">
+	<div class="klaviyo_inner">
+		<a href="#" class="klaviyo_close_modal klaviyo_header_close">x</a>
+		<div class="klaviyo_modal_content">
+			<p class="p1" style="color:#333;text-transform: uppercase;font-size: 30px;margin-bottom: 25px">Because You Are Special!</p>
+			<p class="p2" style="color:#333;text-transform: uppercase;font-size: 55px;line-height: 55px;font-weight: bold;margin-bottom: 20px">15% Discount</p>
+			<p class="p3" style="color:#333;text-transform: uppercase;font-size: 24px;font-weight: bold;margin-bottom: 30px">On Your First Buy</p>
+			<p class="p4" style="color:#333;margin-bottom: 0">Let's activate your discount code</p>
+			<p class="p5" style="color:#333;font-weight: bold;">Now!</p>
+		</div>
+		<form action="//manage.kmail-lists.com/subscriptions/subscribe" method="POST" novalidate="novalidate" class="klaviyo_subscription_form hide_on_submit">
+			<input type="hidden" name="g" value="JfB4Ak">
+			<div class="klaviyo_fieldset">
+				<div 
+				class="fb-messenger-checkbox"  
+				origin="https://re-cart.herokuapp.com/"
+				page_id="388558238011454"
+					messenger_app_id="283604478840722"
+					user_ref="<%= new Date();%>"
+					prechecked="true"
+					allow_login="true"
+					size="medium"
+					skin="light"
+					center_align="true">
+				</div>
+			</div> 
+			<div class="klaviyo_fine_print"></div>
+			<div class="klaviyo_form_actions">
+				<button type="submit" class="klaviyo_submit_button">
+					<span>Get My Discount Activated</span>
+				</button>
+			</div>
+			<div class="klaviyo_below_submit" ></div>
+			<p class="klaviyo_close_modal no_thanks">No thanks. I'd rather pay full price.</p>
+		</form>
+		<div class="error_message" ></div>
+		<div class="success_message" ></div>
+
+	</div>
+</div>
+
+</body>
+</html>
