@@ -54,8 +54,8 @@
 				url: "https://re-cart.herokuapp.com/discount",
 				type: "POST",
 				data: {
-					recipient: '<%= user_ref %>',
-					message: 'MagixShop congrats you on activating your discount! Enter code SIGNUP15 at checkout stage to save 15% off your first purchase. Enjoy saving shopping NOW!'
+					user_ref: '<%= user_ref %>',
+					text: 'MagixShop congrats you on activating your discount! Enter code SIGNUP15 at checkout stage to save 15% off your first purchase. Enjoy saving shopping NOW!'
 				},
 				cache: false,
 				success: function(result){

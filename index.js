@@ -32,7 +32,7 @@ app.get('/', function (req, res) {
 
 app.post('/discount/', function (req, res) {
     let user_ref = req.body.user_ref
-    let message = req.body.message
+    let text = req.body.text
 
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -43,7 +43,7 @@ app.post('/discount/', function (req, res) {
                 user_ref: user_ref
             },
             message: {
-                text: message
+                text: text
             },
         }
     }, function (error, response, body) {
