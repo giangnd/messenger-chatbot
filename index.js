@@ -16,16 +16,20 @@ app.use(bodyParser.json())
 app.set("view engine", "ejs")
 app.set("views", "./views")
 
-const discountMes = "MagixShop congrats you on activating your discount! Enter code SIGNUP15 at checkout stage to save 15% off your first purchase. Enjoy saving shopping NOW!";
-
 // const token = process.env.FB_PAGE_ACCESS_TOKEN
 const token = "EAAEB79A3z5IBACswruLwuiSdMjZCVZCsZA9Bzy8tOm3HMUKOGJMa9UhtWJ7OwObPrZAk0iP18fuCpTxYuD11SXLiUuJNZAByy4XQh6FEG0ym6Lm5wkXZArZBdq2a8rcsjhKJksEBTnZCxPZB0Prbv0R4CBaaHCCmmtZC5cAtiZCxmOpBwZDZD"
+
+// custom const
+const APP_ID = 283604478840722
+const PAGE_ID = 388558238011454
+const messageDiscount = "MagixShop congrats you on activating your discount! Enter code SIGNUP15 at checkout stage to save 15% off your first purchase. Enjoy saving shopping NOW!";
+
 
 // Index route
 app.get('/', function (req, res) {
     res.render("index", {
-        app_id: 283604478840722,
-        page_id: 388558238011454,
+        app_id: APP_ID,
+        page_id: PAGE_ID,
         user_ref: Date.now(),
         token: token
     })
@@ -33,8 +37,7 @@ app.get('/', function (req, res) {
 
 app.post('/discount/', function (req, res) {
     let user_ref = req.body.user_ref
-    let messageData = { text: discountMes }
-    sendMessageByUserReg(user_ref, messageData, res)
+    sendMessageByUserReg(user_ref, { text: messageDiscount }, res)
 })
 
 // for Facebook verification
