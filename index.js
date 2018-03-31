@@ -49,10 +49,12 @@ app.post('/discount/', function (req, res) {
     }, function (error, response, body) {
         if (error) {
             console.log('Error sending messages: ', error)
-            res.send(error)
+            res.status(400).send(error)
         } else if (response.body.error) {
             console.log('Error: ', response.body.error)
-            res.send(error)
+            res.status(400).send(response.body.error)
+        } else {
+            res.status(200).send(body)
         }
     })
 })
