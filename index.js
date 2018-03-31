@@ -68,7 +68,7 @@ app.post('/webhook/', function (req, res) {
             sendMessageByUserReg(event.recipient.id, messageData, res)
         }
     }
-    res.sendStatus(200)
+    res.sendStatus(200).end()
 })
 
 // recommended to inject access tokens as environmental variables, e.g.
