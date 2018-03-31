@@ -65,7 +65,7 @@ app.post('/webhook/', function (req, res) {
             }
         } else {
             let messageData = { text: discountMes }
-            sendMessageByUserReg(event.recipient.id, messageData)
+            sendMessageByUserReg(event.recipient.id, messageData, res)
         }
     }
     res.sendStatus(200)
@@ -131,7 +131,7 @@ function sendMessageByUserId(sender, message) {
     })
 }
 
-function sendMessageByUserReg(user_ref, message, reply = null) {
+function sendMessageByUserReg(user_ref, message, reply) {
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: { access_token: token },
