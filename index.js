@@ -33,7 +33,8 @@ app.get('/', function (req, res) {
 
 app.post('/discount/', function (req, res) {
     let user_ref = req.body.user_ref
-    sendMessageByUserReg(user_ref, discountMes, res)
+    let messageData = { text: discountMes }
+    sendMessageByUserReg(user_ref, messageData, res)
 })
 
 // for Facebook verification
@@ -63,7 +64,8 @@ app.post('/webhook/', function (req, res) {
                 }
             }
         } else {
-            sendMessageByUserReg(event.recipient.id, discountMes, res)
+            let messageData = { text: discountMes }
+            sendMessageByUserReg(event.recipient.id, messageData)
         }
     }
     res.sendStatus(200)
@@ -138,9 +140,7 @@ function sendMessageByUserReg(user_ref, message, reply = null) {
             recipient: { 
                 user_ref: user_ref
             },
-            message: {
-                text: text
-            },
+            message: message,
         }
     }, function (error, response, body) {
         if (error) {
