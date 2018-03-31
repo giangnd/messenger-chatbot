@@ -73,7 +73,7 @@ app.post('/webhook/', function (req, res) {
         let event = req.body.entry[0].messaging[i]
         console.log(event)
         let sender = event.sender.id
-        if (event.message && event.message.text) {
+        if (event.message && event.message.text && !event.message.is_echo) {
             let text = event.message.text
             if (text === 'Generic') {
                 const desc = "Hi there! We noticed there was an item left in your shopping cart. If you're ready to complete your order, your cart is waiting for your return."
@@ -133,7 +133,7 @@ function sendMessage(sender, message) {
         method: 'POST',
         json: {
             recipient: { 
-                user_ref: sender 
+                id: sender 
             },
             message: message,
         }
