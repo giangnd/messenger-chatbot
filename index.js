@@ -16,6 +16,8 @@ app.use(bodyParser.json())
 app.set("view engine", "ejs")
 app.set("views", "./views")
 
+const discountMes = "MagixShop congrats you on activating your discount! Enter code SIGNUP15 at checkout stage to save 15% off your first purchase. Enjoy saving shopping NOW!";
+
 // const token = process.env.FB_PAGE_ACCESS_TOKEN
 const token = "EAAEB79A3z5IBACswruLwuiSdMjZCVZCsZA9Bzy8tOm3HMUKOGJMa9UhtWJ7OwObPrZAk0iP18fuCpTxYuD11SXLiUuJNZAByy4XQh6FEG0ym6Lm5wkXZArZBdq2a8rcsjhKJksEBTnZCxPZB0Prbv0R4CBaaHCCmmtZC5cAtiZCxmOpBwZDZD"
 
@@ -31,31 +33,7 @@ app.get('/', function (req, res) {
 
 app.post('/discount/', function (req, res) {
     let user_ref = req.body.user_ref
-    let text = req.body.text
-
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: { access_token: token },
-        method: 'POST',
-        json: {
-            recipient: { 
-                user_ref: user_ref
-            },
-            message: {
-                text: text
-            },
-        }
-    }, function (error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-            res.status(400).send(error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-            res.status(400).send(response.body.error)
-        } else {
-            res.status(200).send(body)
-        }
-    })
+    sendMessageByUserReg(user_ref, discountMes, res)
 })
 
 // for Facebook verification
@@ -72,16 +50,22 @@ app.post('/webhook/', function (req, res) {
     for (let i = 0; i < messaging_events.length; i++) {
         let event = req.body.entry[0].messaging[i]
         console.log(event)
-        let sender = event.sender.id
-        if (event.message && event.message.text && !event.message.is_echo) {
-            let text = event.message.text
-            if (text === 'Generic') {
-                const desc = "Hi there! We noticed there was an item left in your shopping cart. If you're ready to complete your order, your cart is waiting for your return."
-                sendTextMessage(sender, desc)
-                sendGenericMessage(sender)
-                continue
+
+        if(event.sender.id){
+            let sender = event.sender.id
+            if (event.message && event.message.text && !event.message.is_echo) {
+                let text = event.message.text
+                if (text === 'Generic') {
+                    const desc = "Hi there! We noticed there was an item left in your shopping cart. If you're ready to complete your order, your cart is waiting for your return."
+                    sendTextMessage(sender, desc)
+                    sendGenericMessage(sender)
+                    continue
+                }
             }
+        } else if(event.recipient.id) {
+            sendMessageByUserReg(event.recipient.id, discountMes)
         }
+        
     }
     res.sendStatus(200)
 })
@@ -89,7 +73,7 @@ app.post('/webhook/', function (req, res) {
 // recommended to inject access tokens as environmental variables, e.g.
 function sendTextMessage(sender, text) {
     let messageData = { text: text }
-    sendMessage(sender, messageData)
+    sendMessageByUserId(sender, messageData)
 }
 
 function sendGenericMessage(sender) {
@@ -123,10 +107,10 @@ function sendGenericMessage(sender) {
             }
         }
     }
-    sendMessage(sender, messageData)
+    sendMessageByUserId(sender, messageData)
 }
 
-function sendMessage(sender, message) {
+function sendMessageByUserId(sender, message) {
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: { access_token: token },
@@ -142,6 +126,32 @@ function sendMessage(sender, message) {
             console.log('Error sending messages: ', error)
         } else if (response.body.error) {
             console.log('Error: ', response.body.error)
+        }
+    })
+}
+
+function sendMessageByUserReg(sender, message, reply = null) {
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: { access_token: token },
+        method: 'POST',
+        json: {
+            recipient: { 
+                user_ref: user_ref
+            },
+            message: {
+                text: text
+            },
+        }
+    }, function (error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+            reply.status(400).send(error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+            reply.status(400).send(response.body.error)
+        } else {
+            reply.status(200).send(body)
         }
     })
 }
