@@ -29,7 +29,6 @@ app.get('/', function (req, res) {
     })
 })
 
-
 app.post('/discount/', function (req, res) {
     let user_ref = req.body.user_ref
     let text = req.body.text
