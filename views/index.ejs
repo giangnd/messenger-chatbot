@@ -17,6 +17,7 @@
 		window.fbAsyncInit = function() {
 			FB.init({
 				appId            : '<%= app_id %>',
+				autoLogAppEvents : true,
 				xfbml            : true,
 				version          : 'v2.12'
 			});
@@ -50,18 +51,12 @@
 
 		function sendRecartDiscount(){
 			$.ajax({
-				url: "https://graph.facebook.com/v2.6/me/messages?access_token=<%= token %>",
+				url: "https://re-cart.herokuapp.com/discount",
 				type: "POST",
 				data: {
-					recipient: {
-						user_ref: '<%= user_ref %>'
-					},
-					message: {
-						text: 'MagixShop congrats you on activating your discount! Enter code SIGNUP15 at checkout stage to save 15% off your first purchase. Enjoy saving shopping NOW!'
-					}
+					recipient: '<%= user_ref %>',
+					message: 'MagixShop congrats you on activating your discount! Enter code SIGNUP15 at checkout stage to save 15% off your first purchase. Enjoy saving shopping NOW!'
 				},
-				dataType: "json",
-				contentType: "application/json; charset=utf-8",
 				cache: false,
 				success: function(result){
 					console.log(result);

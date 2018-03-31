@@ -19,7 +19,6 @@ app.set("views", "./views")
 // const token = process.env.FB_PAGE_ACCESS_TOKEN
 const token = "EAAEB79A3z5IBACswruLwuiSdMjZCVZCsZA9Bzy8tOm3HMUKOGJMa9UhtWJ7OwObPrZAk0iP18fuCpTxYuD11SXLiUuJNZAByy4XQh6FEG0ym6Lm5wkXZArZBdq2a8rcsjhKJksEBTnZCxPZB0Prbv0R4CBaaHCCmmtZC5cAtiZCxmOpBwZDZD"
 
-
 // Index route
 app.get('/', function (req, res) {
     res.render("index", {
@@ -28,6 +27,13 @@ app.get('/', function (req, res) {
         user_ref: Date.now(),
         token: token
     })
+})
+
+
+app.post('/discount/', function (req, res) {
+    let recipient = req.body.recipient
+    let message = req.body.message
+    sendTextMessage(recipient, message)
 })
 
 // for Facebook verification
@@ -61,7 +67,7 @@ app.post('/webhook/', function (req, res) {
 // recommended to inject access tokens as environmental variables, e.g.
 function sendTextMessage(sender, text) {
     let messageData = { text: text }
-    makeRequest(sender, messageData)
+    sendMessage(sender, messageData)
 }
 
 function sendGenericMessage(sender) {
@@ -95,16 +101,18 @@ function sendGenericMessage(sender) {
             }
         }
     }
-    makeRequest(sender, messageData)
+    sendMessage(sender, messageData)
 }
 
-function makeRequest(sender, message) {
+function sendMessage(sender, message) {
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: { access_token: token },
         method: 'POST',
         json: {
-            recipient: { id: sender },
+            recipient: { 
+                id: sender 
+            },
             message: message,
         }
     }, function (error, response, body) {
