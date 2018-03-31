@@ -133,7 +133,7 @@ function sendMessage(sender, message) {
         method: 'POST',
         json: {
             recipient: { 
-                id: sender 
+                user_ref: sender 
             },
             message: message,
         }
