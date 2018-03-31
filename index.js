@@ -52,7 +52,7 @@ app.post('/webhook/', function (req, res) {
         let event = req.body.entry[0].messaging[i]
         console.log(event)
 
-        if(event.sender != undefined){
+        if(event.sender){
             let sender = event.sender.id
             if (event.message && event.message.text && !event.message.is_echo) {
                 let text = event.message.text
@@ -63,13 +63,9 @@ app.post('/webhook/', function (req, res) {
                     continue
                 }
             }
-            res.sendStatus(200)
-        } else {
-            let messageData = { text: discountMes }
-            sendMessageByUserReg(event.recipient.id, messageData, res)
         }
     }
-    
+    res.sendStatus(200)
 })
 
 // recommended to inject access tokens as environmental variables, e.g.
