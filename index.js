@@ -31,9 +31,30 @@ app.get('/', function (req, res) {
 
 
 app.post('/discount/', function (req, res) {
-    let recipient = req.body.recipient
+    let user_ref = req.body.user_ref
     let message = req.body.message
-    sendTextMessage(recipient, message)
+
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: { access_token: token },
+        method: 'POST',
+        json: {
+            recipient: { 
+                user_ref: user_ref
+            },
+            message: {
+                text: message
+            },
+        }
+    }, function (error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+            res.send(error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+            res.send(error)
+        }
+    })
 })
 
 // for Facebook verification
