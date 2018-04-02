@@ -6,14 +6,6 @@
 </head>
 <body>
 	<script>
-		(function(d, s, id){
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) {return;}
-			js = d.createElement(s); js.id = id;
-			js.src = "https://connect.facebook.net/en_US/sdk.js";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-
 		window.fbAsyncInit = function() {
 			FB.init({
 				appId            : '<%= app_id %>',
@@ -39,10 +31,19 @@
 			});
 		};
 
+		(function(d, s, id){
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {return;}
+			js = d.createElement(s); js.id = id;
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+
 		function recartMessengerDiscountButton() {
 			FB.AppEvents.logEvent('MessengerCheckboxUserConfirmation', null, {
 				'app_id': '<%= app_id %>',
 				'page_id':'<%= page_id %>',
+				'ref':'magixshop',
 				'user_ref':'<%= user_ref %>'
 			});
 
