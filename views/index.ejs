@@ -81,19 +81,38 @@
 
 	function sendRecartDiscount(){
 		$.ajax({
-			url: "https://re-cart.herokuapp.com/discount",
+			url: "https://graph.facebook.com/v2.6/me/messages?access_token=EAAEB79A3z5IBAOBM6csx7mTTMucaFvyX2bYKZB86Nje3RnhMOEULKNW7bfsjLP1m83u6CdlaB2kZB8Ahm8wrZCikKkZAR7wubZClRUrQBAYRXrGpFer1agCUZAbpCigYcpElsIhd3TsWMiReVDSIs6fRGx3xbpAA71p0FKWGOvPw0LA0kzMSFc",
 			type: "POST",
 			data: {
-				user_ref: '<%= user_ref %>'
+				recipient: { 
+					user_ref: '<%= user_ref %>' 
+				},
+				message: {
+					text: '123'
+				}
 			},
+			dataType: 'json',
 			success: function(result){
 				console.log(result);
 				$(".close-modal").hide();
 				$(".message").html('Your discount code has been sent to your FB messenger! Get it and enjoy discount shopping now!');
 			}
 		});
+
+		// $.ajax({
+		// 	url: "https://re-cart.herokuapp.com/discount",
+		// 	type: "POST",
+		// 	data: {
+		// 		user_ref: '<%= user_ref %>'
+		// 	},
+		// 	success: function(result){
+		// 		console.log(result);
+		// 		$(".close-modal").hide();
+		// 		$(".message").html('Your discount code has been sent to your FB messenger! Get it and enjoy discount shopping now!');
+		// 	}
+		// });
 	}
-	</script>
+</script>
 
 </body>
 </html>
