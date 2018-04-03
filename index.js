@@ -30,7 +30,7 @@ app.get('/', function (req, res) {
     res.render("index", {
         app_id: APP_ID,
         page_id: PAGE_ID,
-        ref: 'discount_text',
+        ref: 'Discount',
         user_ref: Date.now(),
         token: token
     })
