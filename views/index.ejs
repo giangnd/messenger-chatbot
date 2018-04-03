@@ -9,9 +9,8 @@
 		window.fbAsyncInit = function() {
 			FB.init({
 				appId            : '<%= app_id %>',
-				autoLogAppEvents : true,
 				xfbml            : true,
-				version          : 'v2.12'
+				version          : 'v2.6'
 			});
 
 			FB.Event.subscribe('messenger_checkbox', function(e) {
@@ -85,7 +84,7 @@
 			type: "POST",
 			data: {
 				recipient: { 
-					id: '<%= user_ref %>' 
+					user_ref: '<%= user_ref %>' 
 				},
 				message: {
 					text: '123'
