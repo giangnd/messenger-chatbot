@@ -39,32 +39,21 @@
 			fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
 
-		function recartMessengerDiscountButton() {
-			FB.AppEvents.logEvent('MessengerCheckboxUserConfirmation', null, {
-				'app_id': '<%= app_id %>',
-				'page_id':'<%= page_id %>',
-				'ref':'magixshop',
-				'user_ref':'<%= user_ref %>'
-			});
-
-			sendRecartDiscount();
-		}
-
-		function sendRecartDiscount(){
-			$.ajax({
-				url: "https://re-cart.herokuapp.com/discount",
-				type: "POST",
-				data: {
-					user_ref: '<%= user_ref %>'
-				},
-				cache: false,
-				success: function(result){
-					console.log(result);
-					$(".close-modal").hide();
-					$(".message").html('Your discount code has been sent to your FB messenger! Get it and enjoy discount shopping now!');
-				}
-			});
-		}
+		// function sendRecartDiscount(){
+		// 	$.ajax({
+		// 		url: "https://re-cart.herokuapp.com/discount",
+		// 		type: "POST",
+		// 		data: {
+		// 			user_ref: '<%= user_ref %>'
+		// 		},
+		// 		cache: false,
+		// 		success: function(result){
+		// 			console.log(result);
+		// 			$(".close-modal").hide();
+		// 			$(".message").html('Your discount code has been sent to your FB messenger! Get it and enjoy discount shopping now!');
+		// 		}
+		// 	});
+		// }
 
 	</script>
 
@@ -92,6 +81,19 @@
 	</div>
 
 </center>
+
+<script>
+	function recartMessengerDiscountButton() {
+		FB.AppEvents.logEvent('MessengerCheckboxUserConfirmation', null, {
+			'app_id': '<%= app_id %>',
+			'page_id':'<%= page_id %>',
+			'ref':'<%= ref %>',
+			'user_ref':'<%= user_ref %>'
+		});
+
+			// sendRecartDiscount();
+		}
+	</script>
 
 </body>
 </html>

@@ -17,7 +17,7 @@ app.set("view engine", "ejs")
 app.set("views", "./views")
 
 // const token = process.env.FB_PAGE_ACCESS_TOKEN
-const token = "EAAEB79A3z5IBACswruLwuiSdMjZCVZCsZA9Bzy8tOm3HMUKOGJMa9UhtWJ7OwObPrZAk0iP18fuCpTxYuD11SXLiUuJNZAByy4XQh6FEG0ym6Lm5wkXZArZBdq2a8rcsjhKJksEBTnZCxPZB0Prbv0R4CBaaHCCmmtZC5cAtiZCxmOpBwZDZD"
+const token = "EAAEB79A3z5IBAMtcK8rudRmxJlknEb2wTPhnRM8YCBCIkoZA3LwTKHGnUQmlTsoDyk0zZBgCXSetA2Ul4QZAAaAcVNToSt9NUMGzZCJBJXphWN4CVH4Dgz7TJ3YDLHbhx6Ineqh6XY7Wm6JXg4n1LxNraHN8475NBwnxipnI0j4pKlrVKJ8C"
 
 // custom const
 const APP_ID = 283604478840722
@@ -30,6 +30,7 @@ app.get('/', function (req, res) {
     res.render("index", {
         app_id: APP_ID,
         page_id: PAGE_ID,
+        ref: 'Generic',
         user_ref: Date.now(),
         token: token
     })
