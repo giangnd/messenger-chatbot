@@ -9,8 +9,9 @@
 		window.fbAsyncInit = function() {
 			FB.init({
 				appId            : '<%= app_id %>',
+				autoLogAppEvents : true,
 				xfbml            : true,
-				version          : 'v2.6'
+				version          : 'v2.12'
 			});
 
 			FB.Event.subscribe('messenger_checkbox', function(e) {
@@ -69,13 +70,10 @@
 		FB.AppEvents.logEvent('MessengerCheckboxUserConfirmation', null, {
 			'app_id': '<%= app_id %>',
 			'page_id':'<%= page_id %>',
-			'ref':'<%= ref %>',
 			'user_ref':'<%= user_ref %>'
 		});
 
-		setTimeout(function() {
-			sendRecartDiscount();
-		}, 1000);
+		sendRecartDiscount();
 	}
 
 	function sendRecartDiscount(){
