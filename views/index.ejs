@@ -38,23 +38,6 @@
 			js.src = "https://connect.facebook.net/en_US/sdk.js";
 			fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
-
-		// function sendRecartDiscount(){
-		// 	$.ajax({
-		// 		url: "https://re-cart.herokuapp.com/discount",
-		// 		type: "POST",
-		// 		data: {
-		// 			user_ref: '<%= user_ref %>'
-		// 		},
-		// 		cache: false,
-		// 		success: function(result){
-		// 			console.log(result);
-		// 			$(".close-modal").hide();
-		// 			$(".message").html('Your discount code has been sent to your FB messenger! Get it and enjoy discount shopping now!');
-		// 		}
-		// 	});
-		// }
-
 	</script>
 
 	<center>
@@ -93,6 +76,22 @@
 
 			// sendRecartDiscount();
 		}
+
+		// function sendRecartDiscount(){
+		// 	$.ajax({
+		// 		url: "https://re-cart.herokuapp.com/discount",
+		// 		type: "POST",
+		// 		data: {
+		// 			user_ref: '<%= user_ref %>'
+		// 		},
+		// 		cache: false,
+		// 		success: function(result){
+		// 			console.log(result);
+		// 			$(".close-modal").hide();
+		// 			$(".message").html('Your discount code has been sent to your FB messenger! Get it and enjoy discount shopping now!');
+		// 		}
+		// 	});
+		// }
 	</script>
 
 </body>
