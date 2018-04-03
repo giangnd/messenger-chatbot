@@ -17,7 +17,7 @@ app.set("view engine", "ejs")
 app.set("views", "./views")
 
 // const token = process.env.FB_PAGE_ACCESS_TOKEN
-const token = "EAAEB79A3z5IBAMtcK8rudRmxJlknEb2wTPhnRM8YCBCIkoZA3LwTKHGnUQmlTsoDyk0zZBgCXSetA2Ul4QZAAaAcVNToSt9NUMGzZCJBJXphWN4CVH4Dgz7TJ3YDLHbhx6Ineqh6XY7Wm6JXg4n1LxNraHN8475NBwnxipnI0j4pKlrVKJ8C"
+const token = "EAAEB79A3z5IBAGguKVLJI1gXH2LXcNimfHOTKWacOU25kwHHZBGWeMyQhALKZBuzGBysKR5TLfyF208dCciGMATu9DipUZC9sdVhK3iqvmAbIdbwFVI5SZAlFAZAZCviAD0jogCRYZBNXxA4ozwx4aU7a1xzibfD2gMgjsepiRGCcRrhSmV6y28"
 
 // custom const
 const APP_ID = 283604478840722
@@ -30,9 +30,8 @@ app.get('/', function (req, res) {
     res.render("index", {
         app_id: APP_ID,
         page_id: PAGE_ID,
-        ref: 'Discount',
-        user_ref: Date.now(),
-        token: token
+        ref: 'magixshop',
+        user_ref: Date.now()
     })
 })
 
