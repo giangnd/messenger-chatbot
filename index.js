@@ -3,6 +3,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
+const cors = require('cors')
 const app = express()
 
 app.set('port', (process.env.PORT || 5000))
@@ -12,6 +13,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // Process application/json
 app.use(bodyParser.json())
+
+app.use(cors())
 
 app.set("view engine", "ejs")
 app.set("views", "./views")
