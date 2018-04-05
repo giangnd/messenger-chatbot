@@ -20,13 +20,12 @@ app.set("view engine", "ejs")
 app.set("views", "./views")
 
 // const token = process.env.FB_PAGE_ACCESS_TOKEN
-const token = "EAAEB79A3z5IBAOBM6csx7mTTMucaFvyX2bYKZB86Nje3RnhMOEULKNW7bfsjLP1m83u6CdlaB2kZB8Ahm8wrZCikKkZAR7wubZClRUrQBAYRXrGpFer1agCUZAbpCigYcpElsIhd3TsWMiReVDSIs6fRGx3xbpAA71p0FKWGOvPw0LA0kzMSFc"
+const token = "EAAEB79A3z5IBAFWCO5DDGXgbZCZBdrlACMdLRfgR45EPNNbr8fUo9kHPkqvF0gVUT79UkDfAba35Hzn37dbmxzYm5qXWlsgNYss7oSAn366ExKbUSjFcrZBoA60OuIpAuGW8cWbfl03okLJG3Ak8vh1g4hs5HKJum6botoKNRLJY8J6sPma"
 
 // custom const
 const APP_ID = 283604478840722
-const PAGE_ID = 388558238011454
-const messageDiscount = "MagixShop congrats you on activating your discount! Enter code SIGNUP15 at checkout stage to save 15% off your first purchase. Enjoy saving shopping NOW!";
-
+const PAGE_ID = 178407809574589
+const messageDiscount = "MagixShop congrats you on activating your discount! Enter code MFB10 at checkout stage to save 10% off your first purchase Enjoy saving shopping NOW!";
 
 // Index route
 app.get('/', function (req, res) {
