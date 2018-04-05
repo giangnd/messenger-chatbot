@@ -38,6 +38,34 @@
 			js.src = "https://connect.facebook.net/en_US/sdk.js";
 			fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
+
+		function recartMessengerDiscountButton() {
+			FB.AppEvents.logEvent('MessengerCheckboxUserConfirmation', null, {
+				'app_id': '<%= app_id %>',
+				'page_id':'<%= page_id %>',
+				'user_ref':'<%= user_ref %>'
+			});
+
+			setTimeout(function() {
+				sendRecartDiscount();
+			}, 500);
+		}
+
+		function sendRecartDiscount(){
+			$.ajax({
+				url: "https://re-cart.herokuapp.com/discount",
+				type: "POST",
+				data: {
+					user_ref: '<%= user_ref %>'
+				},
+				cache: false,
+				success: function(result){
+					console.log(result);
+					$(".close-modal").hide();
+					$(".message").html('Your discount code has been sent to your FB messenger! Get it and enjoy saving shopping now!');
+				}
+			});
+		}
 	</script>
 
 	<center>
@@ -46,7 +74,7 @@
 
 		<div class="close-modal">
 			<div class="fb-messenger-checkbox"  
-			origin="https://re-cart.herokuapp.com/"
+			origin="<%= origin %>"
 			page_id="<%= page_id %>"
 			messenger_app_id="<%= app_id %>"
 			user_ref="<%= user_ref %>"
@@ -64,36 +92,6 @@
 	</div>
 
 </center>
-
-<script>
-	function recartMessengerDiscountButton() {
-		FB.AppEvents.logEvent('MessengerCheckboxUserConfirmation', null, {
-			'app_id': '<%= app_id %>',
-			'page_id':'<%= page_id %>',
-			'user_ref':'<%= user_ref %>'
-		});
-
-		setTimeout(function() {
-			sendRecartDiscount();
-		}, 500);
-	}
-
-	function sendRecartDiscount(){
-		$.ajax({
-			url: "https://re-cart.herokuapp.com/discount",
-			type: "POST",
-			data: {
-				user_ref: '<%= user_ref %>'
-			},
-			cache: false,
-			success: function(result){
-				console.log(result);
-				$(".close-modal").hide();
-				$(".message").html('Your discount code has been sent to your FB messenger! Get it and enjoy discount shopping now!');
-			}
-		});
-	}
-	</script>
 
 </body>
 </html>
