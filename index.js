@@ -23,7 +23,6 @@ app.set("views", "./views")
 const token = "EAAEB79A3z5IBAFWCO5DDGXgbZCZBdrlACMdLRfgR45EPNNbr8fUo9kHPkqvF0gVUT79UkDfAba35Hzn37dbmxzYm5qXWlsgNYss7oSAn366ExKbUSjFcrZBoA60OuIpAuGW8cWbfl03okLJG3Ak8vh1g4hs5HKJum6botoKNRLJY8J6sPma"
 
 // custom const
-const origin_url = "https://re-cart.herokuapp.com/"
 const APP_ID = 283604478840722
 const PAGE_ID = 178407809574589
 const messageDiscount = "MagixShop congrats you on activating your discount! Enter code MFB10 at checkout stage to save 10% off your first purchase Enjoy saving shopping NOW!";
@@ -31,7 +30,6 @@ const messageDiscount = "MagixShop congrats you on activating your discount! Ent
 // Index route
 app.get('/', function (req, res) {
     res.render("index", {
-        origin: origin_url,
         app_id: APP_ID,
         page_id: PAGE_ID,
         ref: 'magixshop',
