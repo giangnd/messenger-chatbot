@@ -68,6 +68,9 @@ app.post('/webhook/', function (req, res) {
                     // sendGenericMessage(sender)
                     continue
                 }
+                if(text === 'My Abandoned Cart'){
+                    sendTextMessage(sender, "This is an example of a reminder message that your customers will see if they abandon their carts.")
+                }
             }
         }
     }
