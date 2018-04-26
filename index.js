@@ -46,14 +46,14 @@ app.post('/discount/', function (req, res) {
 app.get('/webhook/', function (req, res) {
     console.log(req.query);
     if (req.query['hub.verify_token'] === 'magixshop') {
-        res.json(req.query['hub.challenge'])
+        res.send(req.query['hub.challenge'])
     }
-    res.send('Error, wrong token')
+    res.end('Error, wrong token')
 })
 
 // to post data
 app.post('/webhook/', function (req, res) {
-    console.log(req.body);
+    console.log(req);
     let messaging_events = req.body.entry[0].messaging
     for (let i = 0; i < messaging_events.length; i++) {
         let event = req.body.entry[0].messaging[i]
