@@ -128,38 +128,36 @@ function sendGenericMessage(sender) {
 
 function sendMenuMessage(sender){
 	let messageData = {
-		{
-			"persistent_menu":[{
-				"locale":"default",
-				"composer_input_disabled": true,
-				"call_to_actions":[
-				{
-					"title":"Shop Info",
-					"type":"nested",
-					"call_to_actions":[{
-						"title":"Products",
-						"type":"postback",
-						"payload":"PRODUCTS_PAYLOAD"
-					},
-					{
-						"title":"About us",
-						"type":"web_url",
-						"url":"https://magixshop.com/pages/about-magix-shop",
-					},
-					{
-						"title":"Contact us",
-						"type":"postback",
-						"payload":"CONTACT_PAYLOAD"
-					}]
+		"persistent_menu":[{
+			"locale":"default",
+			"composer_input_disabled": true,
+			"call_to_actions":[
+			{
+				"title":"Shop Info",
+				"type":"nested",
+				"call_to_actions":[{
+					"title":"Products",
+					"type":"postback",
+					"payload":"PRODUCTS_PAYLOAD"
 				},
 				{
+					"title":"About us",
 					"type":"web_url",
-					"title":"Visit Shop",
-					"url":"https://magixshop.com/",
-					"webview_height_ratio":"full"
+					"url":"https://magixshop.com/pages/about-magix-shop",
+				},
+				{
+					"title":"Contact us",
+					"type":"postback",
+					"payload":"CONTACT_PAYLOAD"
 				}]
+			},
+			{
+				"type":"web_url",
+				"title":"Visit Shop",
+				"url":"https://magixshop.com/",
+				"webview_height_ratio":"full"
 			}]
-		}
+		}]
 	}
 	sendMessageByUserId(sender, messageData)
 }
