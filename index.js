@@ -127,7 +127,7 @@ function sendGenericMessage(sender) {
 }
 
 function sendMenuMessage(sender){
-	let messageData = {
+	let data = {
 		"persistent_menu":[{
 			"locale":"default",
 			"composer_input_disabled": true,
@@ -159,7 +159,19 @@ function sendMenuMessage(sender){
 			}]
 		}]
 	}
-	sendMessageByUserId(sender, messageData)
+
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/messages',
+		qs: { access_token: token },
+		method: 'POST',
+		json: {data}
+	}, function (error, response, body) {
+		if (error) {
+			console.log('Error sending messages: ', error)
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error)
+		}
+	})
 }
 
 function sendMessageByUserId(sender, message) {
