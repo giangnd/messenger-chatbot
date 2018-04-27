@@ -78,10 +78,12 @@ app.post('/webhook/', function (req, res) {
 					continue
 				}
 
-				if(text === 'CONTACT_PAYLOAD'){
+				if(text.payload === 'CONTACT_PAYLOAD'){
 					sendTextMessage(sender, "Magix Shop - 60 Paya Lebar Road, Singapore 409051.")
 					continue
 				}
+
+				sendTextMessage(sender, "Text received: " + text.substring(0, 200))
 			}
 			if (event.postback) {
 				let text = JSON.stringify(event.postback)
