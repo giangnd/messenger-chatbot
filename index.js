@@ -77,6 +77,11 @@ app.post('/webhook/', function (req, res) {
 					sendMenuMessage(sender)
 					continue
 				}
+
+				if(text === 'CONTACT_PAYLOAD'){
+					sendTextMessage(sender, "Magix Shop - 60 Paya Lebar Road, Singapore 409051.")
+					continue
+				}
 			}
 			if (event.postback) {
 				let text = JSON.stringify(event.postback)
@@ -138,17 +143,17 @@ function sendMenuMessage(sender){
 				"text":"What do you want to do next?",
 				"buttons":[
 				{
-					"title":"Visit Shop",
+					"title":"Shopping Now",
 					"type":"web_url",
 					"url":"https://magixshop.com/collections/all-products",
 				},
 				{
-					"title":"About us",
+					"title":"About",
 					"type":"web_url",
 					"url":"https://magixshop.com/pages/about-magix-shop",
 				},
 				{
-					"title":"Contact us",
+					"title":"Contact",
 					"type":"postback",
 					"payload":"CONTACT_PAYLOAD"
 				}
