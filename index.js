@@ -64,7 +64,7 @@ app.post('/webhook/', function (req, res) {
 				let text = event.message.text
 
 				if(text.toLowerCase() === 'generic'){
-					sendTextMessage(sender, "This is a bot message")
+					sendTextMessage(sender, "Hi there! We noticed there was an item left in your shopping cart. If you're ready to complete your order, your cart is waiting for your return.")
 					continue
 				}
 
