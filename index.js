@@ -63,6 +63,11 @@ app.post('/webhook/', function (req, res) {
 			if (event.message && event.message.text && !event.message.is_echo) {
 				let text = event.message.text
 
+				if(text.toLowerCase() === 'generic'){
+					sendTextMessage(sender, "This is a bot message")
+					continue
+				}
+
 				if(text.toLowerCase() === 'about'){
 					sendTextMessage(sender, "Discover great deals on extraordinary gadgets at Magix Shop. Our items are curated weekly for modern guys and gals like yourself. Have fun shopping!")
 					continue
