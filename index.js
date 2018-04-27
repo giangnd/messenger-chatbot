@@ -63,23 +63,18 @@ app.post('/webhook/', function (req, res) {
 			if (event.message && event.message.text && !event.message.is_echo) {
 				let text = event.message.text
 
-				if(text.toLowerCase() === 'abandoned cart'){
-					sendTextMessage(sender, "This is an example of a reminder message that your customers will see if they abandon their carts.")
+				if(text.toLowerCase() === 'about'){
+					sendTextMessage(sender, "Discover great deals on extraordinary gadgets at Magix Shop. Our items are curated weekly for modern guys and gals like yourself. Have fun shopping!")
 					continue
 				}
 
-				if (text.toLowerCase() === 'my cart' || text === 'PRODUCTS_PAYLOAD') {
+				if (text.toLowerCase() === 'cart') {
 					sendGenericMessage(sender)
 					continue
 				}
 
 				if(text.toLowerCase() === 'menu'){
 					sendMenuMessage(sender)
-					continue
-				}
-
-				if(text === 'CONTACT_PAYLOAD'){
-					sendTextMessage(sender, "Magix Shop - 60 Paya Lebar Road, Singapore 409051")
 					continue
 				}
 			}
@@ -135,18 +130,17 @@ function sendGenericMessage(sender) {
 }
 
 function sendMenuMessage(sender){
-	let data = {
-		"persistent_menu":[{
-			"locale":"default",
-			"composer_input_disabled": true,
-			"call_to_actions":[
-			{
-				"title":"Shop Info",
-				"type":"nested",
-				"call_to_actions":[{
-					"title":"Products",
-					"type":"postback",
-					"payload":"PRODUCTS_PAYLOAD"
+	let messageData = {
+		"attachment":{
+			"type":"template",
+			"payload":{
+				"template_type":"button",
+				"text":"What do you want to do next?",
+				"buttons":[
+				{
+					"title":"Visit Shop",
+					"type":"web_url",
+					"url":"https://magixshop.com/collections/all-products",
 				},
 				{
 					"title":"About us",
@@ -157,34 +151,13 @@ function sendMenuMessage(sender){
 					"title":"Contact us",
 					"type":"postback",
 					"payload":"CONTACT_PAYLOAD"
-				}]
-			},
-			{
-				"type":"web_url",
-				"title":"Visit Shop",
-				"url":"https://magixshop.com/",
-				"webview_height_ratio":"full"
-			}]
-		}]
+				}
+				]
+			}
+		}
 	}
+	sendMessageByUserId(sender, messageData)
 
-	request({
-		url: 'https://graph.facebook.com/v2.6/me/messages',
-		qs: { access_token: token },
-		method: 'POST',
-		json: {
-			recipient: { 
-				id: sender 
-			},
-			data,
-		}
-	}, function (error, response, body) {
-		if (error) {
-			console.log('Error sending messages: ', error)
-		} else if (response.body.error) {
-			console.log('Error: ', response.body.error)
-		}
-	})
 }
 
 function sendMessageByUserId(sender, message) {
