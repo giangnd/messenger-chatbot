@@ -62,14 +62,22 @@ app.post('/webhook/', function (req, res) {
 			let sender = event.sender.id
 			if (event.message && event.message.text && !event.message.is_echo) {
 				let text = event.message.text
+
+				if(text.toLowerCase() === 'abandoned cart'){
+					sendTextMessage(sender, "This is an example of a reminder message that your customers will see if they abandon their carts.")
+					continue
+				}
+
 				if (text.toLowerCase() === 'my cart' || text === 'PRODUCTS_PAYLOAD') {
 					sendGenericMessage(sender)
 					continue
 				}
+
 				if(text.toLowerCase() === 'menu'){
 					sendMenuMessage(sender)
 					continue
 				}
+
 				if(text === 'CONTACT_PAYLOAD'){
 					sendTextMessage(sender, "Magix Shop - 60 Paya Lebar Road, Singapore 409051")
 					continue
@@ -164,7 +172,12 @@ function sendMenuMessage(sender){
 		url: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: { access_token: token },
 		method: 'POST',
-		json: {data}
+		json: {
+			recipient: { 
+				id: sender 
+			},
+			data,
+		}
 	}, function (error, response, body) {
 		if (error) {
 			console.log('Error sending messages: ', error)
